@@ -36,6 +36,19 @@ function renderTable() {
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
 
+    if (applications.length === 0) {
+    const emptyRow = document.createElement("tr");
+    const emptyCell = document.createElement("td");
+    emptyCell.textContent = "No applications yet — add your first one above!";
+    emptyCell.setAttribute("colspan", "5");
+    emptyCell.style.textAlign = "center";
+    emptyCell.style.color = "#888";
+    emptyCell.style.padding = "20px";
+    emptyRow.appendChild(emptyCell);
+    tableBody.appendChild(emptyRow);
+    return;
+  }
+
   applications.forEach(function (app,index) {
     const row = document.createElement("tr");
 
@@ -54,7 +67,7 @@ function renderTable() {
     const dateCell = document.createElement("td");
     dateCell.textContent = app.dateApplied;
     row.appendChild(dateCell);
-    
+
      // NEW: Delete button cell
     const actionCell = document.createElement("td");
     const deleteBtn = document.createElement("button");
@@ -71,3 +84,4 @@ function renderTable() {
     tableBody.appendChild(row);
   });
 }
+renderTable();
