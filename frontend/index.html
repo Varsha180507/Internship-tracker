@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Internship Application Tracker</h1>
+    <form id="tracker-form">
+  
+  <label for="company">Company:</label>
+  <input type="text" id="company" name="company" required>
+
+  <label for="role">Role:</label>
+  <input type="text" id="role" name="role" required>
+
+  <label for="status">Status:</label>
+  <select id="status" name="status">
+    <option value="Applied">Applied</option>
+    <option value="OA/Assessment">OA/Assessment</option>
+    <option value="Interview">Interview</option>
+    <option value="Offer">Offer</option>
+    <option value="Rejected">Rejected</option>
+  </select>
+
+  <label for="dateApplied">Date Applied:</label>
+  <input type="date" id="dateApplied" name="dateApplied" required>
+
+  <button type="submit">Add Application</button>
+
+</form>
+<table id="appTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- rows will be inserted here by JS -->
+      </tbody>
+    </table>
+    <script src="js/script.js"></script>
+</body>
+</html>
