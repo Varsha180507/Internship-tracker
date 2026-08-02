@@ -35,6 +35,11 @@ form.addEventListener('submit', function (event) {
 function renderTable() {
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
+  applications.sort(function (a, b) {
+  if (a.dateApplied < b.dateApplied) return -1;
+  if (a.dateApplied > b.dateApplied) return 1;
+  return 0;
+});
 
     if (applications.length === 0) {
     const emptyRow = document.createElement("tr");
