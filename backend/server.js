@@ -20,6 +20,14 @@ app.post('/applications', async (req, res) => {
     res.status(400).json({ error: err.message });
   }
 });
+app.get('/applications', async (req, res) => {
+  try {
+    const all = await Application.find().sort({ dateApplied: -1 });
+    res.json(all);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
