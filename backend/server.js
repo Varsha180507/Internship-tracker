@@ -28,6 +28,17 @@ app.get('/applications', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.delete('/applications/:id', async (req, res) => {
+  try {
+    const deleted = await Application.findByIdAndDelete(req.params.id);
+    if (!deleted) {
+      return res.status(404).json({ error: 'Application not found' });
+    }
+    res.json({ message: 'Deleted', id: req.params.id });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
 app.listen(3000, () => {
   console.log('Server running on port 3000');
 });
