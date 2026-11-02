@@ -48,6 +48,7 @@ form.addEventListener('submit',async function (event) {
       return;
     }
     await loadApplications();
+    form.reset();
   } catch (err) {
     console.log('Could not save application:', err.message);
   }
