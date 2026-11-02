@@ -89,10 +89,33 @@ function renderTable() {
     roleCell.textContent = app.role;
     row.appendChild(roleCell);
 
-    const statusCell = document.createElement("td");
-    statusCell.textContent = app.status;
+        const statusCell = document.createElement("td");
+    const statusSelect = document.createElement("select");
+    ["Applied", "OA/Assessment", "Interview", "Offer", "Rejected"].forEach(function (option) {
+      const opt = document.createElement("option");
+      opt.value = option;
+      opt.textContent = option;
+      if (option === app.status) opt.selected = true;
+      statusSelect.appendChild(opt);
+    });
+    statusSelect.addEventListener("change", async function () {
+      try {
+        const response = await fetch(API_URL + '/' + app._id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status: statusSelect.value })
+        });
+        if (!response.ok) {
+          const err = await response.json();
+          alert(err.error);
+        }
+        await loadApplications();
+      } catch (err) {
+        console.log('Could not update:', err.message);
+      }
+    });
+    statusCell.appendChild(statusSelect);
     row.appendChild(statusCell);
-
     const dateCell = document.createElement("td");
     dateCell.textContent = app.dateApplied.slice(0,10);
     row.appendChild(dateCell);
