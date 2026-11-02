@@ -1,11 +1,22 @@
 // Step 1: temporary in-memory storage (our "whiteboard")
 let applications = [];
+const API_URL = 'http://localhost:3000/applications';
+
+async function loadApplications() {
+  try {
+    const response = await fetch(API_URL);
+    applications = await response.json();
+    renderTable();
+  } catch (err) {
+    console.log('Could not load applications:', err.message);
+  }
+}
 
 // Step 2: grab the form element by its id
 const form = document.getElementById('tracker-form');
 
 // Step 3: listen for the submit event
-form.addEventListener('submit', function (event) {
+form.addEventListener('submit',async function (event) {
 
   // Step 4a: stop the browser's default reload behavior
   event.preventDefault();
@@ -25,8 +36,21 @@ form.addEventListener('submit', function (event) {
   };
 
   // Step 4d: push it into our array
-  applications.push(newApplication);
-  renderTable();
+     try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newApplication)
+    });
+    if (!response.ok) {
+      const err = await response.json();
+      alert(err.error);
+      return;
+    }
+    await loadApplications();
+  } catch (err) {
+    console.log('Could not save application:', err.message);
+  }
 
   // Step 4e: proof it worked
   console.log(applications);
@@ -70,18 +94,25 @@ function renderTable() {
     row.appendChild(statusCell);
 
     const dateCell = document.createElement("td");
-    dateCell.textContent = app.dateApplied;
+    dateCell.textContent = app.dateApplied.slice(0,10);
     row.appendChild(dateCell);
 
      // NEW: Delete button cell
     const actionCell = document.createElement("td");
     const deleteBtn = document.createElement("button");
     deleteBtn.textContent = "Delete";
-    deleteBtn.setAttribute("data-index", index);
-    deleteBtn.addEventListener("click", function () {
-      const idxToDelete = deleteBtn.getAttribute("data-index");
-      applications.splice(idxToDelete, 1);
-      renderTable();
+        deleteBtn.addEventListener("click", async function () {
+      try {
+        const response = await fetch(API_URL + '/' + app._id, { method: 'DELETE' });
+        if (!response.ok) {
+          const err = await response.json();
+          alert(err.error);
+          return;
+        }
+        await loadApplications();
+      } catch (err) {
+        console.log('Could not delete:', err.message);
+      }
     });
     actionCell.appendChild(deleteBtn);
     row.appendChild(actionCell);
@@ -89,4 +120,4 @@ function renderTable() {
     tableBody.appendChild(row);
   });
 }
-renderTable();
+loadApplications();

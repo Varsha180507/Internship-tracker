@@ -1,6 +1,7 @@
 const dns = require('dns');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -8,6 +9,7 @@ const Application = require('./models/Application');
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection failed:', err.message));
+app.use(cors());
 app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World v2!');
