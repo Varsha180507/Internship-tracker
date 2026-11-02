@@ -9,6 +9,7 @@ async function loadApplications() {
     renderTable();
   } catch (err) {
     console.log('Could not load applications:', err.message);
+    showTableMessage('Cannot reach the server. Please try again in a moment.');
   }
 }
 
@@ -51,6 +52,7 @@ form.addEventListener('submit',async function (event) {
     form.reset();
   } catch (err) {
     console.log('Could not save application:', err.message);
+    alert('Could not reach the server. Please try again.');
   }
 
   // Step 4e: proof it worked
@@ -113,6 +115,7 @@ function renderTable() {
         await loadApplications();
       } catch (err) {
         console.log('Could not update:', err.message);
+        alert('Could not reach the server. Please try again.');
       }
     });
     statusCell.appendChild(statusSelect);
@@ -136,6 +139,7 @@ function renderTable() {
         await loadApplications();
       } catch (err) {
         console.log('Could not delete:', err.message);
+        alert('Could not reach the server. Please try again.');
       }
     });
     actionCell.appendChild(deleteBtn);
@@ -143,5 +147,18 @@ function renderTable() {
 
     tableBody.appendChild(row);
   });
+}
+function showTableMessage(message) {
+  const tableBody = document.getElementById("tableBody");
+  tableBody.innerHTML = "";
+  const row = document.createElement("tr");
+  const cell = document.createElement("td");
+  cell.textContent = message;
+  cell.setAttribute("colspan", "5");
+  cell.style.textAlign = "center";
+  cell.style.color = "#c0392b";
+  cell.style.padding = "20px";
+  row.appendChild(cell);
+  tableBody.appendChild(row);
 }
 loadApplications();
