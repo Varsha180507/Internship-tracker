@@ -1,7 +1,6 @@
 // Step 1: temporary in-memory storage (our "whiteboard")
 let applications = [];
-const API_URL = 'http://localhost:3000/applications';
-
+const API_URL = 'https://internship-tracker-api-fy0l.onrender.com/applications'
 async function loadApplications() {
   try {
     const response = await fetch(API_URL);
