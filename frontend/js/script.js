@@ -1,6 +1,7 @@
 // Step 1: temporary in-memory storage (our "whiteboard")
 let applications = [];
 const API_URL = 'https://internship-tracker-api-fy0l.onrender.com/applications'
+let searchText = "";
 async function loadApplications() {
   try {
     const response = await fetch(API_URL);
@@ -80,7 +81,9 @@ function renderTable() {
     return;
   }
 
-  applications.forEach(function (app,index) {
+  applications.filter(function (app) {
+  return app.company.toLowerCase().includes(searchText.toLowerCase());
+}).forEach(function (app, index) {
     const row = document.createElement("tr");
 
     const companyCell = document.createElement("td");
@@ -161,3 +164,7 @@ function showTableMessage(message) {
   tableBody.appendChild(row);
 }
 loadApplications();
+document.getElementById("searchBox").addEventListener("input", function (e) {
+  searchText = e.target.value;
+  renderTable();
+});
