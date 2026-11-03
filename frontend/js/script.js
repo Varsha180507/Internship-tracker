@@ -59,6 +59,9 @@ form.addEventListener('submit',async function (event) {
   console.log(applications);
 
 });
+function colorKey(status) {
+  return status.toLowerCase().replace(/[^a-z]/g, "");
+}
 function renderSummary() {
   const statuses = ["Applied", "OA/Assessment", "Interview", "Offer", "Rejected"];
   const counts = {};
@@ -72,7 +75,7 @@ function renderSummary() {
   summary.innerHTML = "";
   statuses.forEach(function (s) {
     const card = document.createElement("div");
-    card.className = "summary-card";
+    card.className = "summary-card status-" + colorKey(s);
     card.textContent = s + ": " + counts[s];
     summary.appendChild(card);
   });
@@ -128,6 +131,7 @@ if (filtered.length === 0) {
 
         const statusCell = document.createElement("td");
     const statusSelect = document.createElement("select");
+    statusSelect.className = "status-" + colorKey(app.status);
     ["Applied", "OA/Assessment", "Interview", "Offer", "Rejected"].forEach(function (option) {
       const opt = document.createElement("option");
       opt.value = option;
