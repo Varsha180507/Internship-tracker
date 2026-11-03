@@ -1,3 +1,43 @@
+:root {
+  --page: #f4f6f8;
+  --card: #ffffff;
+  --text: #1a1a1a;
+  --muted: #555555;
+  --border: #eeeeee;
+  --input-border: #cccccc;
+  --input-bg: #ffffff;
+  --head: #2c3e50;
+  --heading: #2c3e50;
+  --row-hover: #f9f9f9;
+  --shadow: rgba(0,0,0,0.1);
+
+  --applied-bg: #dbeafe;  --applied-fg: #1e40af;
+  --oa-bg: #fef3c7;       --oa-fg: #92400e;
+  --interview-bg: #ede9fe; --interview-fg: #5b21b6;
+  --offer-bg: #dcfce7;    --offer-fg: #166534;
+  --rejected-bg: #fee2e2; --rejected-fg: #991b1b;
+}
+
+:root[data-theme="dark"] {
+  --page: #111827;
+  --card: #1f2937;
+  --text: #f3f4f6;
+  --muted: #9ca3af;
+  --border: #374151;
+  --input-border: #4b5563;
+  --input-bg: #111827;
+  --head: #374151;
+  --heading: #f3f4f6;
+  --row-hover: #273244;
+  --shadow: rgba(0,0,0,0.5);
+
+  --applied-bg: #1e3a8a;  --applied-fg: #bfdbfe;
+  --oa-bg: #78350f;       --oa-fg: #fde68a;
+  --interview-bg: #4c1d95; --interview-fg: #ddd6fe;
+  --offer-bg: #14532d;    --offer-fg: #bbf7d0;
+  --rejected-bg: #7f1d1d; --rejected-fg: #fecaca;
+}
+
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
@@ -7,20 +47,33 @@ body {
   max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
-  background-color: #f4f6f8;
-  color: #1a1a1a;
+  background-color: var(--page);
+  color: var(--text);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 h1 {
   text-align: center;
-  color: #2c3e50;
+  color: var(--heading);
+}
+
+#themeToggle {
+  display: block;
+  margin: 0 0 16px auto;
+  padding: 8px 14px;
+  border: 1px solid var(--input-border);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 14px;
 }
 
 form {
-  background: #ffffff;
+  background: var(--card);
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px var(--shadow);
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -32,14 +85,21 @@ form label {
   display: block;
   font-size: 13px;
   margin-bottom: 4px;
-  color: #555;
+  color: var(--muted);
 }
 
-form input, form select {
+form input, form select, #searchBox {
   padding: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--input-border);
   border-radius: 4px;
   font-size: 14px;
+  background: var(--input-bg);
+  color: var(--text);
+}
+
+#searchBox {
+  margin-bottom: 12px;
+  width: 260px;
 }
 
 form button {
@@ -59,20 +119,20 @@ form button:hover {
 table {
   width: 100%;
   border-collapse: collapse;
-  background: white;
+  background: var(--card);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 4px var(--shadow);
 }
 
 th, td {
   text-align: left;
   padding: 12px 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--border);
 }
 
 th {
-  background-color: #2c3e50;
+  background-color: var(--head);
   color: white;
   font-size: 14px;
   text-transform: uppercase;
@@ -80,8 +140,9 @@ th {
 }
 
 tr:hover {
-  background-color: #f9f9f9;
+  background-color: var(--row-hover);
 }
+
 #summary {
   display: flex;
   gap: 12px;
@@ -92,11 +153,11 @@ tr:hover {
 .summary-card {
   padding: 10px 16px;
   border-radius: 8px;
-  background: #eef2ff;
   font-weight: 600;
 }
-.status-applied      { background: #dbeafe; color: #1e40af; }
-.status-oaassessment { background: #fef3c7; color: #92400e; }
-.status-interview    { background: #ede9fe; color: #5b21b6; }
-.status-offer        { background: #dcfce7; color: #166534; }
-.status-rejected     { background: #fee2e2; color: #991b1b; }
+
+.status-applied      { background: var(--applied-bg);   color: var(--applied-fg); }
+.status-oaassessment { background: var(--oa-bg);        color: var(--oa-fg); }
+.status-interview    { background: var(--interview-bg); color: var(--interview-fg); }
+.status-offer        { background: var(--offer-bg);     color: var(--offer-fg); }
+.status-rejected     { background: var(--rejected-bg);  color: var(--rejected-fg); }

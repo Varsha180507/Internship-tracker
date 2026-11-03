@@ -204,3 +204,19 @@ document.getElementById("searchBox").addEventListener("input", function (e) {
   searchText = e.target.value;
   renderTable();
 });
+const themeToggle = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  themeToggle.textContent = theme === "dark" ? "☀️ Light" : "🌙 Dark";
+}
+
+let savedTheme = "light";
+try { savedTheme = localStorage.getItem("theme") || "light"; } catch (e) {}
+applyTheme(savedTheme);
+
+themeToggle.addEventListener("click", function () {
+  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  applyTheme(next);
+  try { localStorage.setItem("theme", next); } catch (e) {}
+});
