@@ -80,10 +80,23 @@ function renderTable() {
     tableBody.appendChild(emptyRow);
     return;
   }
-
-  applications.filter(function (app) {
+  const filtered = applications.filter(function (app) {
   return app.company.toLowerCase().includes(searchText.toLowerCase());
-}).forEach(function (app, index) {
+});
+
+if (filtered.length === 0) {
+  const noMatchRow = document.createElement("tr");
+  const noMatchCell = document.createElement("td");
+  noMatchCell.textContent = "No applications match your search.";
+  noMatchCell.setAttribute("colspan", "5");
+  noMatchCell.style.textAlign = "center";
+  noMatchCell.style.padding = "20px";
+  noMatchRow.appendChild(noMatchCell);
+  tableBody.appendChild(noMatchRow);
+  return;
+}
+
+ filtered.forEach(function (app, index) {
     const row = document.createElement("tr");
 
     const companyCell = document.createElement("td");
