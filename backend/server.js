@@ -9,7 +9,13 @@ const Application = require('./models/Application');
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection failed:', err.message));
-app.use(cors());
+const allowedOrigins = [
+  'https://celebrated-chaja-d5e61c.netlify.app',
+  'http://127.0.0.1:5500',
+  'http://localhost:5500'
+];
+
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.get('/', (req, res) => {
   res.send('Hello World v2!');
