@@ -82,3 +82,16 @@ th {
 tr:hover {
   background-color: #f9f9f9;
 }
+#summary {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.summary-card {
+  padding: 10px 16px;
+  border-radius: 8px;
+  background: #eef2ff;
+  font-weight: 600;
+}

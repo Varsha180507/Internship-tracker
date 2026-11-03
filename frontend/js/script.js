@@ -59,9 +59,28 @@ form.addEventListener('submit',async function (event) {
   console.log(applications);
 
 });
+function renderSummary() {
+  const statuses = ["Applied", "OA/Assessment", "Interview", "Offer", "Rejected"];
+  const counts = {};
+  statuses.forEach(function (s) { counts[s] = 0; });
+
+  applications.forEach(function (app) {
+    counts[app.status] = (counts[app.status] || 0) + 1;
+  });
+
+  const summary = document.getElementById("summary");
+  summary.innerHTML = "";
+  statuses.forEach(function (s) {
+    const card = document.createElement("div");
+    card.className = "summary-card";
+    card.textContent = s + ": " + counts[s];
+    summary.appendChild(card);
+  });
+}
 function renderTable() {
   const tableBody = document.getElementById("tableBody");
   tableBody.innerHTML = "";
+  renderSummary();
   applications.sort(function (a, b) {
   if (a.dateApplied < b.dateApplied) return -1;
   if (a.dateApplied > b.dateApplied) return 1;
