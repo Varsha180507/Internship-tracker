@@ -4,6 +4,7 @@ const API_URL = 'https://internship-tracker-api-fy0l.onrender.com/applications'
 let searchText = "";
 async function loadApplications() {
   try {
+    showTableMessage('Waking up the server, this can take up to a minute. Please wait...');
     const response = await fetch(API_URL);
     applications = await response.json();
     renderTable();
