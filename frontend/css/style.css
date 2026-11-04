@@ -161,3 +161,7 @@ tr:hover {
 .status-interview    { background: var(--interview-bg); color: var(--interview-fg); }
 .status-offer        { background: var(--offer-bg);     color: var(--offer-fg); }
 .status-rejected     { background: var(--rejected-bg);  color: var(--rejected-fg); }
+td:nth-child(1),
+td:nth-child(2) {
+  text-transform: capitalize;
+}
