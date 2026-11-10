@@ -19,7 +19,7 @@ const allowedOrigins = [
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.get('/', (req, res) => {
-  res.send('Internship Tracker API is running'g);
+  res.send('Internship Tracker API is running');
 });
 app.post('/applications', async (req, res) => {
   try {
