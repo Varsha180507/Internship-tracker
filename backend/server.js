@@ -10,7 +10,6 @@ mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch((err) => console.log('MongoDB connection failed:', err.message));
 const allowedOrigins = [
-  'https://celebrated-chaja-d5e61c.netlify.app',
   'https://internship-application-tracker.netlify.app',
   'http://127.0.0.1:5500',
   'http://localhost:5500'
