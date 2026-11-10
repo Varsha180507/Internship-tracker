@@ -18,7 +18,7 @@ const allowedOrigins = [
 app.use(cors({ origin: allowedOrigins }));
 app.use(express.json());
 app.get('/', (req, res) => {
-  res.send('Hello World v2!');
+  res.send('Internship Tracker API is running');
 });
 app.post('/applications', async (req, res) => {
   try {
