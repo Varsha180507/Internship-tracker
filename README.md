@@ -2,7 +2,7 @@
 
 A full-stack web app to track internship applications from first application to final offer.
 
-**Live demo:** https://celebrated-chaja-d5e61c.netlify.app
+**Live demo:** https://internship-application-tracker.netlify.app
 
 > The backend runs on Render's free tier and sleeps when idle, so the first load can take up to about a minute. The page shows a "waking up" message while it starts.
 
